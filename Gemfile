@@ -46,6 +46,7 @@ gem "bootsnap", require: false
 
 # User authentication
 gem 'devise'
+gem 'rolify'
 
 # Background jobs
 gem 'sidekiq'
