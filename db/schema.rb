@@ -10,9 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_04_080158) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_04_162549) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "organizations", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "press_releases", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.datetime "publish_date"
+    t.integer "status"
+    t.bigint "user_id", null: false
+    t.bigint "publisher_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["publisher_id"], name: "index_press_releases_on_publisher_id"
+    t.index ["user_id"], name: "index_press_releases_on_user_id"
+  end
+
+  create_table "publishers", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.bigint "organization_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_publishers_on_organization_id"
+  end
 
   create_table "roles", force: :cascade do |t|
     t.string "name"
@@ -44,4 +73,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_04_080158) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  add_foreign_key "press_releases", "publishers"
+  add_foreign_key "press_releases", "users"
+  add_foreign_key "publishers", "organizations"
 end

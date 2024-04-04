@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @press_release %>
+
+<div>
+  <%= link_to "Edit this press release", edit_press_release_path(@press_release) %> |
+  <%= link_to "Back to press releases", press_releases_path %>
+
+  <%= button_to "Destroy this press release", @press_release, method: :delete %>
+</div>

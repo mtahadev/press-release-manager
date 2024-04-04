@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Press releases</h1>
+
+<div id="press_releases">
+  <% @press_releases.each do |press_release| %>
+    <%= render press_release %>
+    <p>
+      <%= link_to "Show this press release", press_release %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New press release", new_press_release_path %>
