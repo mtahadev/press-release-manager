@@ -8,15 +8,29 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+# Create Roles
+roles = ['admin', 'editor', 'contributor']
+roles.each do |role|
+  Role.find_or_create_by(name: role)
+end
 
-# Create roles
-admin_role = Role.create(name: 'admin')
-manager_role = Role.create(name: 'manager')
+# Create a sample user
+user = User.find_or_initialize_by(email: 'admin@example.com')
+if user.new_record?
+  user.password = 'password'
+  user.password_confirmation = 'password'
+  user.save!
+  user.add_role :admin
+end
 
-# Create users
-admin_user = User.create(email: 'admin@example.com', password: 'password')
-manager_user = User.create(email: 'manager@example.com', password: 'password')
+# Create sample organizations
+org1 = Organization.find_or_create_by(name: 'Tech Innovations', description: 'A leading company in tech innovations.')
+org2 = Organization.find_or_create_by(name: 'Green Energy Solutions', description: 'Focused on renewable energy solutions.')
 
-# Assign roles to users
-admin_user.roles << admin_role
-manager_user.roles << manager_role
+# Create sample publishers associated with organizations
+pub1 = Publisher.find_or_create_by(name: 'Tech News Daily', description: 'Latest updates in technology.', organization: org1)
+pub2 = Publisher.find_or_create_by(name: 'Renewable Now', description: 'Covering the future of green energy.', organization: org2)
+
+# Create sample press releases
+PressRelease.find_or_create_by(title: 'New Tech Frontier', content: 'Exploring the new frontier in technology.', publish_date: Time.now, status: :published, publisher: pub1, author: user)
+PressRelease.find_or_create_by(title: 'Sustainable Future', content: 'How green energy is paving the way for a sustainable future.', publish_date: Time.now, status: :published, publisher: pub2, author: user)
