@@ -3,24 +3,27 @@
 <h1>Press Releases <%= link_to "New Press Release", new_press_release_path, class: "btn btn-success" %></h1>
 
 <div class="tabs">
+  <!-- Tab Links -->
   <ul class="nav nav-tabs" id="pressReleaseTabs" role="tablist">
     <li class="nav-item" role="presentation">
-      <button class="nav-link active" id="published-tab" data-bs-toggle="tab" data-bs-target="#published" type="button" role="tab" aria-controls="published" aria-selected="true">Published</button>
+      <%= link_to 'Published', press_releases_path(status: 'published'), class: "nav-link active", data: { turbo_frame: "press_releases_list" } %>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="draft-tab" data-bs-toggle="tab" data-bs-target="#draft" type="button" role="tab" aria-controls="draft" aria-selected="false">Draft</button>
+      <%= link_to 'Draft', press_releases_path(status: 'draft'), class: "nav-link", data: { turbo_frame: "press_releases_list" } %>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="archived-tab" data-bs-toggle="tab" data-bs-target="#archived" type="button" role="tab" aria-controls="archived" aria-selected="false">Archived</button>
+      <%= link_to 'Archived', press_releases_path(status: 'archived'), class: "nav-link", data: { turbo_frame: "press_releases_list" } %>
     </li>
   </ul>
 
-  <div class="tab-content" id="pressReleaseTabsContent">
-    <!-- Published Tab Pane -->
-    <div class="tab-pane fade show active" id="published" role="tabpanel" aria-labelledby="published-tab">
+  <!-- Tab Content -->
+  <%= turbo_frame_tag 'press_releases_list' do %>
+    <div class="tab-content" id="pressReleaseTabsContent">
+      <!-- Published Tab Pane -->
+      <div class="tab-pane fade show active" id="published" role="tabpanel" aria-labelledby="published-tab">
       <div class="row">
-      <% if @press_releases[:published].present? %>
-        <% @press_releases[:published].each do |press_release| %>
+      <% if @press_releases.present? %>
+        <% @press_releases.each do |press_release| %>
           <div class="col-md-4 mb-4">
             <div class="card fixed-height-card">
               <%= image_tag 'press-release.png', class: 'card-img-top', alt: 'Press release image' %>
@@ -40,61 +43,7 @@
         </div>
       <% end %>
       </div>
-    </div>
-
-
-    <!-- Draft Tab Pane -->
-    <div class="tab-pane fade" id="draft" role="tabpanel" aria-labelledby="draft-tab">
-      <div class="row">
-        <% if @press_releases[:draft].present? %>
-          <% @press_releases[:draft].each do |press_release| %>
-            <div class="col-md-4 mb-4">
-              <div class="card fixed-height-card">
-                <%= image_tag 'press-release.png', class: 'card-img-top', alt: 'Press release image' %>
-                <div class="card-body">
-                  <h5 class="card-title"><%= press_release.title %></h5>
-                  <p class="card-text"><%= press_release.content.truncate(100) %></p>
-                  <%= link_to 'Read More', press_release, class: 'btn btn-primary' %>
-                </div>
-              </div>
-            </div>
-          <% end %>
-        <% else %>
-          <div class="col-md-12">
-            <div class="alert alert-info" role="alert">
-              <strong>No draft press releases found.</strong>
-            </div>
-          </div>
-        <% end %>
       </div>
     </div>
-
-    <!-- Archived Tab Pane -->
-    <div class="tab-pane fade" id="archived" role="tabpanel" aria-labelledby="archived-tab">
-      <div class="row">
-        <% if @press_releases[:archived].present? %>
-          <% @press_releases[:archived].each do |press_release| %>
-            <div class="col-md-4 mb-4">
-              <div class="card fixed-height-card">
-                <%= image_tag 'press-release.png', class: 'card-img-top', alt: 'Press release image' %>
-                <div class="card-body">
-                  <h5 class="card-title"><%= press_release.title %></h5>
-                  <p class="card-text"><%= press_release.content.truncate(100) %></p>
-                  <%= link_to 'Read More', press_release, class: 'btn btn-primary' %>
-                </div>
-              </div>
-            </div>
-          <% end %>
-        <% else %>
-          <div class="col-md-12">
-            <div class="alert alert-info" role="alert">
-              <strong>No archived press releases found.</strong>
-            </div>
-          </div>
-        <% end %>
-      </div>
-    </div>
-
-  </div>
+  <% end %>
 </div>
-
