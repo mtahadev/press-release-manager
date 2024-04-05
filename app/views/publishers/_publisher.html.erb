@@ -1,17 +1,8 @@
-<div id="<%= dom_id publisher %>">
-  <p>
-    <strong>Name:</strong>
-    <%= publisher.name %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= publisher.description %>
-  </p>
-
-  <p>
-    <strong>Organization:</strong>
-    <%= publisher.organization_id %>
-  </p>
-
+<div id="<%= dom_id(publisher) %>" class="card">
+  <div class="card-body">
+    <h5 class="card-title">Publisher Details</h5>
+    <p class="card-text"><strong>Name:</strong> <%= publisher.name %></p>
+    <p class="card-text"><strong>Description:</strong> <%= publisher.description %></p>
+    <p class="card-text"><strong>Organization:</strong> <%= publisher.organization&.name %></p>
+  </div>
 </div>

@@ -1,14 +1,16 @@
-<p style="color: green"><%= notice %></p>
+<p class="text-success"><%= notice %></p>
 
-<h1>Publishers</h1>
+<h1>Publishers <%= link_to "New Publisher", new_publisher_path, class: "btn btn-success" %></h1>
 
 <div id="publishers">
   <% @publishers.each do |publisher| %>
-    <%= render publisher %>
-    <p>
-      <%= link_to "Show this publisher", publisher %>
-    </p>
+    <div class="card mb-3">
+      <div class="card-body">
+        <%= render publisher %>
+      </div>
+      <div class="card-footer">
+        <%= link_to "Show this publisher", publisher, class: "btn btn-primary" %>
+      </div>
+    </div>
   <% end %>
 </div>
-
-<%= link_to "New publisher", new_publisher_path %>

@@ -11,6 +11,18 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%= render partial: 'layouts/partials/header' %>
+    <% if true #user_signed_in? && current_user.has_role?(:admin) %>
+      <%= render partial: 'layouts/partials/admin_tabs' %>
+    <% end %>
+
+    <div class="container mt-5">
+      <h2 class="mb-4">Featured Press Releases</h2>
+      <div class="row">
+        <%= yield %>
+      </div>
+    </div>
+  <%= render partial: 'layouts/partials/footer' %>
   </body>
+  
 </html>

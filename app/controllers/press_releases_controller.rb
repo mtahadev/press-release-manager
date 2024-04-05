@@ -3,7 +3,12 @@ class PressReleasesController < ApplicationController
 
   # GET /press_releases or /press_releases.json
   def index
-    @press_releases = PressRelease.all
+    # @press_releases = PressRelease.all
+    @press_releases = {
+      published: PressRelease.where(status: :published),
+      draft: PressRelease.where(status: :draft),
+      archived: PressRelease.where(status: :archived)
+    }
   end
 
   # GET /press_releases/1 or /press_releases/1.json
@@ -18,6 +23,19 @@ class PressReleasesController < ApplicationController
   # GET /press_releases/1/edit
   def edit
   end
+
+  # def create
+  #   @press_release = PressRelease.new(press_release_params)
+  #   if @press_release.save
+  #     # Schedule the job if publish_date is in the future
+  #     if @press_release.publish_date > Time.current
+  #       PublishPressReleaseJob.set(wait_until: @press_release.publish_date).perform_later(@press_release.id)
+  #     end
+  #     redirect_to @press_release, notice: 'Press release was successfully created and scheduled for publishing.'
+  #   else
+  #     render :new, status: :unprocessable_entity
+  #   end
+  # end
 
   # POST /press_releases or /press_releases.json
   def create

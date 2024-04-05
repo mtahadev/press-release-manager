@@ -1,12 +1,7 @@
-<div id="<%= dom_id organization %>">
-  <p>
-    <strong>Name:</strong>
-    <%= organization.name %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= organization.description %>
-  </p>
-
+<div id="<%= dom_id(organization) %>" class="card">
+  <div class="card-body">
+    <h5 class="card-title">Organization Details</h5>
+    <p class="card-text"><strong>Name:</strong> <%= organization.name %></p>
+    <p class="card-text"><strong>Description:</strong> <%= organization.description %></p>
+  </div>
 </div>

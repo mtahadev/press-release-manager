@@ -1,0 +1,82 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+ @import "bootstrap";
+
+
+.fixed-height-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%; // Make the card take up the full height of its parent container
+
+  .card-img-top {
+    width: 100%; // Ensure the image covers the width.
+    height: 200px; // Adjust as needed
+    object-fit: cover; // This makes the image cover the allocated area, without stretching.
+  }
+
+  .card-body {
+    flex: 1; // This allows the card body to expand and fill the space, pushing the footer down.
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; // Spreads the content and the footer button.
+  }
+}
+
+
+//  body, .main-content {
+//   padding-bottom: 100px; // Adjust based on your footer's height
+// }
+
+
+// .fixed-footer {
+//   position: fixed;
+//   bottom: 0;
+//   left: 0;
+//   width: 100%;
+//   z-index: 1030; // Ensure it stays above most other content; adjust as needed based on your layout
+// }
+
+//  .footer-custom {
+//   text-align: center; // Center text horizontally
+//   background-color: rgba(0, 0, 0, 0.2); // Footer background color
+//   padding: 20px 0; // Adjust padding as needed
+//   width: 100%;
+
+//   a {
+//     color: $link-color; // Assuming you have a variable for link colors or use a direct color value
+//     text-decoration: none;
+
+//     &:hover {
+//       text-decoration: underline;
+//     }
+//   }
+// }
+
+// .footer-custom {
+//   text-align: center; /* Center text horizontally */
+//   width: 100%;
+//   padding: 20px 0; /* Adjust padding as needed */
+//   background-color: rgba(0, 0, 0, 0.2); /* Footer background color */
+//   position: relative;
+// }
+
+// .footer-custom .container {
+//   position: absolute;
+//   top: 50%;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+// }

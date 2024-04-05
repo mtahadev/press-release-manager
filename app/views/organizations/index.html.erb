@@ -1,14 +1,17 @@
-<p style="color: green"><%= notice %></p>
+<p class="text-success"><%= notice %></p>
 
-<h1>Organizations</h1>
+<h1>Organizations <%= link_to "New organization", new_organization_path, class: "btn btn-success" %> </h1> 
 
 <div id="organizations">
   <% @organizations.each do |organization| %>
-    <%= render organization %>
-    <p>
-      <%= link_to "Show this organization", organization %>
-    </p>
+
+    <div class="card mb-3">
+      <div class="card-body">
+        <%= render organization %>
+      </div>
+      <div class="card-footer">
+        <%= link_to "Show this organization", organization, class: "btn btn-primary" %>
+      </div>
+    </div>
   <% end %>
 </div>
-
-<%= link_to "New organization", new_organization_path %>

@@ -51,6 +51,9 @@ gem 'rolify'
 # Background jobs
 gem 'sidekiq'
 
+gem "bootstrap"
+gem "sassc-rails"
+
 # Frontend
 # gem 'hotwire-rails'
 # gem 'view_component'
