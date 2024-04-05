@@ -1,0 +1,9 @@
+<div class="card fixed-height-card">
+  <%= image_tag 'press-release.png', class: 'card-img-top', alt: 'Press release image' %>
+  <div class="card-body">
+    <h5 class="card-title"><%= @title %></h5>
+    <p class="card-text"><%= @content.truncate(100) %></p>
+    <p class="card-text green">Status: <%= @status %></p>
+    <%= link_to 'Read More', @press_release, class: 'btn btn-primary' %>
+  </div>
+</div>

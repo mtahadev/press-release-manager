@@ -6,7 +6,7 @@ class PressReleasesController < ApplicationController
     @press_releases = if params[:status].present?
                         PressRelease.where(status: params[:status])
                       else
-                        PressRelease.all
+                        PressRelease.where(status: 'published')
                       end
   
     # Respond to Turbo Stream to allow dynamic updates

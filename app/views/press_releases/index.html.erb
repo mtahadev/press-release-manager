@@ -19,30 +19,20 @@
   <!-- Tab Content -->
   <%= turbo_frame_tag 'press_releases_list' do %>
     <div class="tab-content" id="pressReleaseTabsContent">
-      <!-- Published Tab Pane -->
-      <div class="tab-pane fade show active" id="published" role="tabpanel" aria-labelledby="published-tab">
-      <div class="row">
-      <% if @press_releases.present? %>
-        <% @press_releases.each do |press_release| %>
-          <div class="col-md-4 mb-4">
-            <div class="card fixed-height-card">
-              <%= image_tag 'press-release.png', class: 'card-img-top', alt: 'Press release image' %>
-              <div class="card-body">
-                <h5 class="card-title"><%= press_release.title %></h5>
-                <p class="card-text"><%= press_release.content.truncate(100) %></p>
-                <%= link_to 'Read More', press_release, class: 'btn btn-primary' %>
+      <div class="tab-pane fade show active" role="tabpanel">
+        <div class="row">
+          <% if @press_releases.present? %>
+            <% @press_releases.each do |press_release| %>
+              <div class="col-md-4 mb-4">
+                <%= render PressReleaseComponent.new(press_release: press_release) %>
               </div>
+            <% end %>
+          <% else %>
+            <div class="alert alert-info" role="alert">
+              <strong>No press releases found.</strong>
             </div>
-          </div>
-        <% end %>
-      <% else %>
-        <div class="col-md-12">
-          <div class="alert alert-info" role="alert">
-            <strong>No published press releases found.</strong>
-          </div>
+          <% end %>
         </div>
-      <% end %>
-      </div>
       </div>
     </div>
   <% end %>
