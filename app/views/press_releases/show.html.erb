@@ -1,10 +1,24 @@
-<p style="color: green"><%= notice %></p>
+<p class="text-success"><%= notice %></p>
+
+<% if @press_release.errors.any? %>
+  <div class="alert alert-danger" role="alert">
+    <ul>
+      <% @press_release.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 
 <%= render @press_release %>
 
-<div>
-  <%= link_to "Edit this press release", edit_press_release_path(@press_release) %> |
-  <%= link_to "Back to press releases", press_releases_path %>
-
-  <%= button_to "Destroy this press release", @press_release, method: :delete %>
+<div class="mt-5">
+  <div class="row">
+    <div class="col-2">
+      <%= link_to "Edit this press release", edit_press_release_path(@press_release), class: "btn btn-primary mr-2" %>
+    </div>
+    <div class="col">
+      <%= button_to "Destroy this press release", @press_release, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+    </div>
+  </div>
 </div>

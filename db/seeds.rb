@@ -32,5 +32,5 @@ pub1 = Publisher.find_or_create_by(name: 'Tech News Daily', description: 'Latest
 pub2 = Publisher.find_or_create_by(name: 'Renewable Now', description: 'Covering the future of green energy.', organization: org2)
 
 # Create sample press releases
-PressRelease.find_or_create_by(title: 'New Tech Frontier', content: 'Exploring the new frontier in technology.', publish_date: Time.now, status: :published, publisher: pub1, author: user)
-PressRelease.find_or_create_by(title: 'Sustainable Future', content: 'How green energy is paving the way for a sustainable future.', publish_date: Time.now, status: :published, publisher: pub2, author: user)
+PressRelease.find_or_create_by(title: 'New Tech Frontier', content: 'Exploring the new frontier in technology.', publish_date: Time.now + 10.hours, status: :published, publisher: pub1, author: user)
+PressRelease.find_or_create_by(title: 'Sustainable Future', content: 'How green energy is paving the way for a sustainable future.', publish_date: Time.now + 10.hours, status: :published, publisher: pub2, author: user)

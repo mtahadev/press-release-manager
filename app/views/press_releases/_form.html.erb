@@ -1,47 +1,75 @@
-<%= form_with(model: press_release) do |form| %>
+<%= form_with(model: press_release, html: {class: "needs-validation", novalidate: true}) do |form| %>
   <% if press_release.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(press_release.errors.count, "error") %> prohibited this press_release from being saved:</h2>
-
+    <div class="alert alert-danger" role="alert">
+      <h4 class="alert-heading"><%= pluralize(press_release.errors.count, "error") %> prohibited this publisher from being saved:</h4>
       <ul>
-        <% press_release.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+        <% press_release.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :title, style: "display: block" %>
-    <%= form.text_field :title %>
+  <div class="form-group mb-3">
+    <%= form.label :title %>
+    <%= form.text_field :title, class: "form-control" + (press_release.errors[:title].any? ? " is-invalid" : "") %>
+    <% if press_release.errors[:title].any? %>
+      <div class="invalid-feedback">
+        <%= press_release.errors[:title].first %>
+      </div>
+    <% end %>
   </div>
 
-  <div>
-    <%= form.label :content, style: "display: block" %>
-    <%= form.text_area :content %>
+  <div class="form-group mb-3">
+    <%= form.label :content %>
+    <%= form.text_area :content, class: "form-control" + (press_release.errors[:content].any? ? " is-invalid" : "") %>
+    <% if press_release.errors[:content].any? %>
+      <div class="invalid-feedback">
+        <%= press_release.errors[:content].first %>
+      </div>
+    <% end %>
   </div>
 
-  <div>
-    <%= form.label :publish_date, style: "display: block" %>
-    <%= form.datetime_field :publish_date %>
+  <div class="form-group mb-3">
+    <%= form.label :publish_date, "Publish Date (should be at least 5 hours ahead of the current time)" %>
+    <%= form.datetime_field :publish_date, class: "form-control" + (press_release.errors[:publish_date].any? ? " is-invalid" : ""), placeholder: "Select publish date", value: (Time.now + 5.hours).strftime('%Y-%m-%dT%H:%M'), min: (Time.now + 5.hours).strftime('%Y-%m-%dT%H:%M') %>
+    <% if press_release.errors[:publish_date].any? %>
+      <div class="invalid-feedback">
+        <%= press_release.errors[:publish_date].first %>
+      </div>
+    <% end %>
   </div>
 
-  <div>
-    <%= form.label :status, style: "display: block" %>
-    <%= form.number_field :status %>
+  <div class="form-group mb-3">
+    <%= form.label :status %>
+    <% if press_release.new_record? %>
+      <%= form.select :status, { "Draft" => "draft" }, {}, { class: "form-control" + (press_release.errors[:status].any? ? " is-invalid" : "") } %>
+    <% else %>
+      <% current_status = press_release.status %> <!-- Get the current status value -->
+      <%= form.select :status, PressRelease.statuses.map { |key, value| [key.titleize, key] }, { selected: current_status }, { class: "form-control", readonly: true } %>
+    <% end %>
+    <% if press_release.errors[:status].any? %>
+      <div class="invalid-feedback">
+        <%= press_release.errors[:status].first %>
+      </div>
+    <% end %>
   </div>
 
-  <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.text_field :user_id %>
+
+  <div class="form-group mb-3">
+    <%= form.label :publisher_id %>
+    <%= form.collection_select :publisher_id, Publisher.all, :id, :name, {include_blank: "Choose publisher"}, class: "form-control" + (press_release.errors[:publisher_id].any? ? " is-invalid" : "") %>
+    <% if press_release.errors[:publisher_id].any? %>
+      <div class="invalid-feedback">
+        <%= press_release.errors[:publisher_id].first %>
+      </div>
+    <% end %>
   </div>
 
-  <div>
-    <%= form.label :publisher_id, style: "display: block" %>
-    <%= form.text_field :publisher_id %>
-  </div>
+  <!-- Hidden field for user_id -->
+  <%= form.hidden_field :user_id, value: current_user.id %>
 
-  <div>
-    <%= form.submit %>
+  <div class="form-group">
+    <%= form.submit class: "btn btn-primary" %>
   </div>
 <% end %>

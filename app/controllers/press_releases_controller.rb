@@ -24,19 +24,6 @@ class PressReleasesController < ApplicationController
   def edit
   end
 
-  # def create
-  #   @press_release = PressRelease.new(press_release_params)
-  #   if @press_release.save
-  #     # Schedule the job if publish_date is in the future
-  #     if @press_release.publish_date > Time.current
-  #       PublishPressReleaseJob.set(wait_until: @press_release.publish_date).perform_later(@press_release.id)
-  #     end
-  #     redirect_to @press_release, notice: 'Press release was successfully created and scheduled for publishing.'
-  #   else
-  #     render :new, status: :unprocessable_entity
-  #   end
-  # end
-
   # POST /press_releases or /press_releases.json
   def create
     @press_release = PressRelease.new(press_release_params)
